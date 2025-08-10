@@ -1,95 +1,74 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Kanban — Launch Career</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <aside class="sidebar">
-    <div class="brand">
-      <div class="logo">▦▦▦</div>
-      <div class="word">kanban</div>
-    </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kanban Board</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="main.js"></script>
+  </head>
+  <body class="bg-gray-100 min-h-screen flex">
 
-    <nav class="boards">
-      <div class="boards-label">ALL BOARDS (1)</div>
-      <button class="board-item active">Launch Career</button>
-    </nav>
-  </aside>
-
-  <div class="main">
-    <header class="top">
-      <h1 class="title">Launch Career</h1>
-      <button id="add-task-btn" class="add-task">+ Add New Task</button>
-    </header>
-
-    <section class="columns">
-      <div class="column">
-        <div class="column-head">
-          <span class="dot blue"></span>
-          <div class="col-title">TODO <span class="count" id="count-todo">(0)</span></div>
-        </div>
-        <div class="task-list" data-column="todo"></div>
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white shadow-md p-6 hidden md:block">
+      <!-- Logo Image Only -->
+      <div class="flex items-center mb-10">
+        <img src="assets/logo-light.svg" alt="Kanban Logo" class="h-6 w-auto object-contain" />
       </div>
 
-      <div class="column">
-        <div class="column-head">
-          <span class="dot purple"></span>
-          <div class="col-title">DOING <span class="count" id="count-doing">(0)</span></div>
+      <div class="text-gray-500 text-xs uppercase tracking-widest mb-2">All Boards (1)</div>
+
+      <button class="bg-purple-600 text-white px-4 py-2 rounded-full w-full text-left text-sm font-medium">
+        Launch Career
+      </button>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6 overflow-auto">
+      <h2 class="text-xl font-semibold text-gray-800 mb-6">Launch Career</h2>
+
+      <!-- Kanban Columns -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Todo Column -->
+        <div>
+          <div class="flex items-center space-x-2 mb-4">
+            <div class="w-3 h-3 rounded-full bg-blue-400"></div>
+            <h3 class="text-sm font-semibold text-gray-600 uppercase">Todo (4)</h3>
+          </div>
+          <div class="space-y-4">
+            <div class="bg-white shadow rounded-md p-4">Launch Epic Career 🚀</div>
+            <div class="bg-white shadow rounded-md p-4">Conquer React ⚛️</div>
+            <div class="bg-white shadow rounded-md p-4">Understand Databases 🧠</div>
+            <div class="bg-white shadow rounded-md p-4">Crush Frameworks 🖼️</div>
+          </div>
         </div>
-        <div class="task-list" data-column="doing"></div>
+
+        <!-- Doing Column -->
+        <div>
+          <div class="flex items-center space-x-2 mb-4">
+            <div class="w-3 h-3 rounded-full bg-purple-500"></div>
+            <h3 class="text-sm font-semibold text-gray-600 uppercase">Doing (2)</h3>
+          </div>
+          <div class="space-y-4">
+            <div class="bg-white shadow rounded-md p-4">Master JavaScript 💛</div>
+            <div class="bg-white shadow rounded-md p-4">Never Give Up 🏆</div>
+          </div>
+        </div>
+
+        <!-- Done Column -->
+        <div>
+          <div class="flex items-center space-x-2 mb-4">
+            <div class="w-3 h-3 rounded-full bg-green-400"></div>
+            <h3 class="text-sm font-semibold text-gray-600 uppercase">Done (2)</h3>
+          </div>
+          <div class="space-y-4">
+            <div class="bg-white shadow rounded-md p-4">Explore ES6 Features 🚀</div>
+            <div class="bg-white shadow rounded-md p-4">Have fun 🥳</div>
+          </div>
+        </div>
+
       </div>
-
-      <div class="column">
-        <div class="column-head">
-          <span class="dot green"></span>
-          <div class="col-title">DONE <span class="count" id="count-done">(0)</span></div>
-        </div>
-        <div class="task-list" data-column="done"></div>
-      </div>
-    </section>
-  </div>
-
-  <!-- Modal (shared for Add/Edit) -->
-  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
-    <div class="backdrop" data-action="close"></div>
-
-    <div class="modal-card" role="document">
-      <header class="modal-header">
-        <h2 id="modal-title">Add Task</h2>
-        <button id="modal-close" class="close">✕</button>
-      </header>
-
-      <form id="modal-form" class="modal-form">
-        <label class="field">
-          <span class="field-label">Title</span>
-          <input id="field-title" name="title" required maxlength="120" />
-        </label>
-
-        <label class="field">
-          <span class="field-label">Description</span>
-          <textarea id="field-desc" name="description" rows="4" maxlength="800"></textarea>
-        </label>
-
-        <label class="field">
-          <span class="field-label">Status</span>
-          <select id="field-status" name="status">
-            <option value="todo">To Do</option>
-            <option value="doing">Doing</option>
-            <option value="done">Done</option>
-          </select>
-        </label>
-
-        <div class="modal-actions">
-          <button type="submit" id="modal-save" class="btn-primary">Save</button>
-          <button type="button" id="modal-cancel" class="btn-secondary" data-action="close">Cancel</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <script type="module" src="main.js"></script>
-</body>
+    </main>
+  </body>
 </html>

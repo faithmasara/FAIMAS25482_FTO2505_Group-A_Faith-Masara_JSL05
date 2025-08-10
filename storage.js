@@ -41,4 +41,3 @@ export function getNextId(tasks) {
   if (!tasks || tasks.length === 0) return 1;
   const max = tasks.reduce((m, t) => Math.max(m, Number(t.id || 0)), 0);
   return max + 1;
-}

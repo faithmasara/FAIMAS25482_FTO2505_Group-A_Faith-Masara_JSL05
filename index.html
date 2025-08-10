@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kanban — Launch Career</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo">▦▦▦</div>
+      <div class="word">kanban</div>
+    </div>
+
+    <nav class="boards">
+      <div class="boards-label">ALL BOARDS (1)</div>
+      <button class="board-item active">Launch Career</button>
+    </nav>
+  </aside>
+
+  <div class="main">
+    <header class="top">
+      <h1 class="title">Launch Career</h1>
+      <button id="add-task-btn" class="add-task">+ Add New Task</button>
+    </header>
+
+    <section class="columns">
+      <div class="column">
+        <div class="column-head">
+          <span class="dot blue"></span>
+          <div class="col-title">TODO <span class="count" id="count-todo">(0)</span></div>
+        </div>
+        <div class="task-list" data-column="todo"></div>
+      </div>
+
+      <div class="column">
+        <div class="column-head">
+          <span class="dot purple"></span>
+          <div class="col-title">DOING <span class="count" id="count-doing">(0)</span></div>
+        </div>
+        <div class="task-list" data-column="doing"></div>
+      </div>
+
+      <div class="column">
+        <div class="column-head">
+          <span class="dot green"></span>
+          <div class="col-title">DONE <span class="count" id="count-done">(0)</span></div>
+        </div>
+        <div class="task-list" data-column="done"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Modal (shared for Add/Edit) -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="backdrop" data-action="close"></div>
+
+    <div class="modal-card" role="document">
+      <header class="modal-header">
+        <h2 id="modal-title">Add Task</h2>
+        <button id="modal-close" class="close">✕</button>
+      </header>
+
+      <form id="modal-form" class="modal-form">
+        <label class="field">
+          <span class="field-label">Title</span>
+          <input id="field-title" name="title" required maxlength="120" />
+        </label>
+
+        <label class="field">
+          <span class="field-label">Description</span>
+          <textarea id="field-desc" name="description" rows="4" maxlength="800"></textarea>
+        </label>
+
+        <label class="field">
+          <span class="field-label">Status</span>
+          <select id="field-status" name="status">
+            <option value="todo">To Do</option>
+            <option value="doing">Doing</option>
+            <option value="done">Done</option>
+          </select>
+        </label>
+
+        <div class="modal-actions">
+          <button type="submit" id="modal-save" class="btn-primary">Save</button>
+          <button type="button" id="modal-cancel" class="btn-secondary" data-action="close">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
